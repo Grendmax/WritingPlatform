@@ -1,0 +1,18 @@
+﻿@model WritingPlatform.Models.WorksViewModel
+
+@{
+    Layout = null;
+}
+
+
+
+<div>Rating : @ViewBag.Ratings</div>
+
+@foreach (var item in ViewBag.CommentsList)
+{
+    <p></p>
+    <td scope="col">Username: @item.UserName</td>
+    <p></p>
+    <td scope="col">Comment:<textarea readonly="readonly" rows="3" cols="40"> @item.Comment</textarea></td>
+
+}

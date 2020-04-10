@@ -1,0 +1,18 @@
+﻿@model IEnumerable<WritingPlatform.Models.WorksViewModel>
+
+@{ 
+    Layout = null;
+}
+
+@foreach (var item in ViewBag.WorksList)
+{
+    <tr>
+        <td scope="row">@item.Name</td>
+        <td scope="row">@item.DateOfPublication</td>
+        <td scope="row">@item.UserName</td>
+        <td scope="row">@item.GenreName</td>
+        <td>
+            @Html.ActionLink("Подробнее", "Details", new { id = item.Id }) 
+        </td>
+    </tr>
+}

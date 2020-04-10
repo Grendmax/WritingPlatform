@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WritingPlatform.Models.WorksViewModel>
+
+
+@{
+        ViewBag.Title = "Index";       
+        AjaxOptions ajax = new AjaxOptions
+        {
+            UpdateTargetId = "worksListFor",
+            Url=Url.Action("GetWorks")
+    };
+}
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Ajax.BeginForm(ajax))
+{
+    <input type="text" name="filter" value="@ViewBag.filter" placeholder="Введите имя для поиска...">
+    <span>
+        <button type="submit">Найти</button>
+    </span>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfPublication)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GenreId)
+            </th>
+            <th></th>
+        </tr>
+        <tbody id="worksListFor">
+             @Html.Action("GetWorks")
+        </tbody>
+    </table>
+
+}

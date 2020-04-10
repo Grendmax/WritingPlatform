@@ -1,0 +1,42 @@
+﻿@model WritingPlatform.Models.UsersViewModel
+
+@{
+    ViewBag.Title = "PersonalProfile";
+}
+
+<h2>Личный кабинет</h2>
+
+@{
+    string login = HttpContext.Current.User.Identity.Name;
+    if (!string.IsNullOrEmpty(login))
+    {
+        <h4>@login</h4>
+        
+    }
+}
+
+
+
+<p>
+    @Html.ActionLink("Добавить произведение", "Create","Works")
+</p>
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+
+    
+   
+
+    <p>
+        @Html.ActionLink("Удалить аккаунт", "DeleteAccount", "Users")
+    </p>
+
+
+</div>
+}
