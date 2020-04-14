@@ -48,6 +48,10 @@ namespace WritingPlatform.Controllers
             {
                 ids = Convert.ToInt32(cookieReq["ids"]);
             }
+            else {
+                FormsAuthentication.SignOut();
+            }
+         
             model.UserId = ids;
             model.DateOfPublication = DateTime.Now;
             if (ModelState.IsValid)
@@ -55,7 +59,7 @@ namespace WritingPlatform.Controllers
                 WorksBO newWork = AutoMapper<WorksViewModel, WorksBO>.Map(model);
 
                 workServ.Create(newWork);
-                return RedirectToActionPermanent("Index", "Home");
+                return RedirectToActionPermanent("Index", "Works");
             }
             return View();
 
@@ -109,7 +113,8 @@ namespace WritingPlatform.Controllers
                 idsUser = Convert.ToInt32(cookieReqs["ids"]);
             }
 
-            if (work.UserId != 0) {
+            if (work.UserId != 0)
+            {
                 RatingsBO userRatingForWork = ratingServ.GetRatings().Where(x => x.UserId == idsUser && x.WorkId == idsWork).FirstOrDefault();
 
                 RatingsBO newRating = new RatingsBO();

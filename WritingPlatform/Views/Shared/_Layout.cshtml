@@ -9,43 +9,42 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-light" style="background-color: #e3f2fd;  navbar-inverse navbar-fixed-top ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+            
                 @Html.ActionLink("Writers", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
+            
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("О программе", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Писатели", "Index", "Users")</li>
-                    <li>@Html.ActionLink("Произведения", "Index", "Works")</li>
-                    <li>
-                    @{
-                        string login = HttpContext.Current.User.Identity.Name;
-                        if (!string.IsNullOrEmpty(login))
-                        {
-                            @Html.ActionLink("Личный кабинет", "PersonalProfile", "Users")
+                    <li class="nav-item">@Html.ActionLink("О программе", "About", "Home",null, new { @class = "nav-link" })</li>
+                    <li class="nav-item ">@Html.ActionLink("Контакт", "Contact", "Home",null, new { @class = "nav-link" })</li>
+                    <li class="nav-item ">@Html.ActionLink("Писатели", "Index", "Users",null, new { @class = "nav-link" })</li>
+                    <li class="nav-item ">@Html.ActionLink("Произведения", "Index", "Works",null, new { @class = "nav-link" })</li>
+                    <li class="nav-item ">
+                        @{
+                            string login = HttpContext.Current.User.Identity.Name;
+                            if (!string.IsNullOrEmpty(login))
+                            {
+                                @Html.ActionLink("Личный кабинет", "PersonalProfile", "Users",null, new { @class = "nav-link" })
 
+                            }
                         }
-                    }
                     </li>
-                    <li>@{
-                        string login1 = HttpContext.Current.User.Identity.Name;
-                        if (!string.IsNullOrEmpty(login1))
-                        {
-                                @Html.ActionLink(HttpContext.Current.User.Identity.Name + " | Logout", "Logout", "Users")                        
+                    <li class="nav-item ">
+                        @{
+                            string login1 = HttpContext.Current.User.Identity.Name;
+                            if (!string.IsNullOrEmpty(login1))
+                            {
+                                @Html.ActionLink(HttpContext.Current.User.Identity.Name + " | Logout", "Logout", "Users",null, new { @class = "nav-link" })
+                                
+                            }
                         }
-                    }</li>
+                    </li>
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
+
     <div class="container body-content">
         @RenderBody()
         <hr />

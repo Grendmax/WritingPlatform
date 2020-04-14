@@ -14,8 +14,13 @@ namespace WritingPlatform.Controllers
     [Authorize]
     public class UsersController : Controller
     {
-        IUsers userServ;
-        IAuthen autServ;
+        readonly IUsers userServ;
+        readonly IAuthen autServ;
+
+        public UsersController(IUsers serv)
+        {
+            userServ = serv;
+        }
         public UsersController(IUsers serv,IAuthen serv1)
         {
             autServ = serv1;
@@ -93,7 +98,7 @@ namespace WritingPlatform.Controllers
                 userServ.Create(newUser);               
                 return RedirectToActionPermanent("Index", "Users");
             }
-            return View();
+            return View("Create");
 
         }
 

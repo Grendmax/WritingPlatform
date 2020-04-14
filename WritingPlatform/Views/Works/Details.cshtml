@@ -15,32 +15,31 @@
 <h2>Learn More</h2>
 
 @*<div class="form-group">
-    @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-        @Html.TextAreaFor(model => model.Content, 10, 150, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
-    </div>
-</div>*@
+        @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Content, 10, 150, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>*@
 
 @using (Ajax.BeginForm(ajax))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-group">
+    <div class="form-group shadow-textarea">
         @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Content, 10, 150, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
-            @Html.EditorFor(model => model.Id, " ", new { htmlAttributes = new { @class = "form-control hidden" } })
-
+            @Html.TextAreaFor(model => model.Content,10,40, new { @readonly = "readonly",style="width: 100%; max-width: 100%;",  @class="form-control z-depth-1"  })
 
         </div>
     </div>
+
 
     <div class="form-horizontal">
         <h4>WorksViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            
+
             @Html.Label("Comment", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, " ", new { htmlAttributes = new { @class = "form-control" } })
@@ -57,6 +56,7 @@
                      Text = x.ToString(),
                      Value = x.ToString()
                  }))
+                @Html.HiddenFor(model=>model.Id)
             </div>
         </div>
 
@@ -65,9 +65,9 @@
                 <input type="submit" value="Оставить отзыв" class="btn btn-default" />
             </div>
         </div>
-        
+
         <div id="commentListFor">
-            
+
             @Html.Action("GetComments")
         </div>
     </div>

@@ -12,7 +12,7 @@
         <td scope="row">@item.UserName</td>
         <td scope="row">@item.GenreName</td>
         <td>
-            @Html.ActionLink("Подробнее", "Details", new { id = item.Id }) 
+            @Html.ActionLink("Подробнее", "Details", new { id = item.Id },new { @class = "btn btn-info" }) 
         </td>
     </tr>
 }

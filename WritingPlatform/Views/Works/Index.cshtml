@@ -2,45 +2,52 @@
 
 
 @{
-        ViewBag.Title = "Index";       
-        AjaxOptions ajax = new AjaxOptions
-        {
-            UpdateTargetId = "worksListFor",
-            Url=Url.Action("GetWorks")
+    ViewBag.Title = "Все произведения";
+    AjaxOptions ajax = new AjaxOptions
+    {
+        UpdateTargetId = "worksListFor",
+        Url = Url.Action("GetWorks")
     };
 }
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-<h2>Index</h2>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<h2>Все произведения</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Добавить", "Create",null, new { @class = "btn btn-dark" })
 </p>
 
 @using (Ajax.BeginForm(ajax))
 {
-    <input type="text" name="filter" value="@ViewBag.filter" placeholder="Введите имя для поиска...">
-    <span>
-        <button type="submit">Найти</button>
-    </span>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateOfPublication)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GenreId)
-            </th>
-            <th></th>
-        </tr>
-        <tbody id="worksListFor">
-             @Html.Action("GetWorks")
-        </tbody>
-    </table>
+    @*<input type="text" name="filter" value="@ViewBag.filter" placeholder="Введите имя для поиска...">*@
+    @*<span>
+            <button type="submit">Найти</button>
+        </span>*@
 
-}
+        
+        <input class="form-control d-inline" name="filter" value="@ViewBag.filter" type="search" placeholder="Введите название для поиска">
+        <button class="btn btn-outline-success" type="submit">Найти</button>
+        
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateOfPublication)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GenreId)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="worksListFor">
+                @Html.Action("GetWorks")
+            </tbody>
+        </table>
+
+        }
