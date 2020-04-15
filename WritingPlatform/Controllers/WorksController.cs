@@ -50,6 +50,7 @@ namespace WritingPlatform.Controllers
             }
             else {
                 FormsAuthentication.SignOut();
+                return RedirectToActionPermanent("Index", "Works");
             }
          
             model.UserId = ids;
@@ -111,6 +112,9 @@ namespace WritingPlatform.Controllers
             if (cookieReqs != null)
             {
                 idsUser = Convert.ToInt32(cookieReqs["ids"]);
+            }
+            else {
+                FormsAuthentication.SignOut();
             }
 
             if (work.UserId != 0)

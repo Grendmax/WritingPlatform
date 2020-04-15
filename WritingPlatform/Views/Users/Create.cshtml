@@ -1,17 +1,17 @@
 ﻿@model WritingPlatform.Models.UsersViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Регистрация";
 }
 
-<h2>Create</h2>
+<h2>Создание пользователя</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>UsersViewModels</h4>
+        <h4>Регистрация</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -41,12 +41,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Зарегистрироваться" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("На главное", "Index","Home",null,new { @class = "btn btn-info" })
 </div>

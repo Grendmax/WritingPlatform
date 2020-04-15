@@ -17,13 +17,7 @@
 </p>
 
 @using (Ajax.BeginForm(ajax))
-{
-    @*<input type="text" name="filter" value="@ViewBag.filter" placeholder="Введите имя для поиска...">*@
-    @*<span>
-            <button type="submit">Найти</button>
-        </span>*@
-
-        
+{  
         <input class="form-control d-inline" name="filter" value="@ViewBag.filter" type="search" placeholder="Введите название для поиска">
         <button class="btn btn-outline-success" type="submit">Найти</button>
         
@@ -50,4 +44,4 @@
             </tbody>
         </table>
 
-        }
+}

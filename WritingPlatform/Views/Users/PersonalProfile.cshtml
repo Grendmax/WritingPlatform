@@ -16,11 +16,9 @@
 }
 
 
-
 <p>
-    @Html.ActionLink("Добавить произведение", "Create","Works")
+    @Html.ActionLink("Добавить произведение", "Create","Works",null, new { @class = "btn btn-primary" })
 </p>
-
 
 
 @using (Html.BeginForm())
@@ -30,13 +28,9 @@
 <div class="form-horizontal">
     <hr />
 
-    
-   
-
     <p>
-        @Html.ActionLink("Удалить аккаунт", "DeleteAccount", "Users")
+        @Html.ActionLink("Удалить аккаунт", "DeleteAccount", "Users",null, new { @class = "btn btn-dark" })
     </p>
-
 
 </div>
 }

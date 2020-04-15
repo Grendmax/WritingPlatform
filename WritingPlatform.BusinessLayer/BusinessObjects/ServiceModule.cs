@@ -1,23 +1,23 @@
-﻿using Ninject.Modules;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WritingPlatform.DataLayer.UnitOfWork;
+using Autofac;
 
 namespace WritingPlatform.BusinessLayer.BusinessObjects
 {
-    public class ServiceModule : NinjectModule
+    public class ServiceModule : Module
     {
         string connection;
         public ServiceModule(string connection)
         {
             this.connection = connection;
         }
-        public override void Load()
+        protected override void Load(ContainerBuilder builder)
         {
-            Bind<IUnitOfWork>().To<UnitOfWork>().WithConstructorArgument(connection);
+            builder.Register(c => new UnitOfWork(connection)).As<IUnitOfWork>();
         }
     }
 }

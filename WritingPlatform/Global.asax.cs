@@ -1,7 +1,4 @@
-﻿using Ninject;
-using Ninject.Modules;
-using Ninject.Web.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,10 +20,7 @@ namespace WritingPlatform
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            NinjectModule Module = new NinjectHelper();
-            NinjectModule serviceModule = new ServiceModule("Model1");
-            var kernel = new StandardKernel(serviceModule, Module);
-            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+            AutofacConfig.ConfigureContainer();
         }
     }
 }

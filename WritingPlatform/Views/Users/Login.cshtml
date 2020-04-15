@@ -1,10 +1,10 @@
 ﻿@model WritingPlatform.Models.UsersViewModel
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Войти";
 }
 
-<h2>Login</h2>
+<h2>Авторизация</h2>
 
 <div class="panel">
     <div class="panel-body">
@@ -15,17 +15,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Login</label>
+                    <label>Имя пользователя</label>
                     @Html.TextBoxFor(m=>m.Login,new {@class="form-control" })
                 </div>
 
                 <div class="form-group">
-                    <label>Password</label>
+                    <label>Пароль</label>
                     @Html.PasswordFor(m => m.Password, new { @class="form-control" })
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Login" class="btn btn-primary"  />
-                    <p>  @Html.ActionLink("Sign Up", "Create", "Users")  </p>
+                    <input type="submit" value="Войти" class="btn btn-primary"  /><br></br>
+                    <p>  @Html.ActionLink("Создать аккаунт", "Create", "Users",null,new { @class = "btn btn-primary" })  </p>
                 </div>
 
             }
