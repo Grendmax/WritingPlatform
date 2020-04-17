@@ -22,5 +22,11 @@ namespace WritingPlatform
 
             AutofacConfig.ConfigureContainer();
         }
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            HttpApplication app = sender as HttpApplication;
+            app.Response.Filter = null;
+        }
+
     }
 }
