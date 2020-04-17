@@ -27,9 +27,46 @@
 
 <div class="form-horizontal">
     <hr />
-
+    @if (ViewBag.UserWorksList.Count != 0)
+    {
+    <h3>Мои произведения</h3>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Название
+                </th>
+                <th>
+                    Дата публикации
+                </th>
+                <th>
+                    
+                </th>
+                <th>
+                    
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody >
+            @foreach (var item in ViewBag.UserWorksList)
+            {
+                <tr>
+                    <td scope="row">@item.Name</td>
+                    <td scope="row">@item.DateOfPublication</td>
+                    <td>
+                        @Html.ActionLink("Подробнее", "Details", "Works", new { id = item.Id }, new { @class = "btn btn-info" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "Delete", "Works", new { id = item.Id }, new { @class = "btn btn-info" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
     <p>
-        @Html.ActionLink("Удалить аккаунт", "DeleteAccount", "Users",null, new { @class = "btn btn-dark" })
+        @Html.ActionLink("Удалить аккаунт", "DeleteAccount", "Users", null, new { @class = "btn btn-dark" })
     </p>
 
 </div>

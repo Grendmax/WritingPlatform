@@ -18,7 +18,7 @@
 
 @using (Ajax.BeginForm(ajax))
 {  
-        <input class="form-control d-inline" name="filter" value="@ViewBag.filter" type="search" placeholder="Введите название для поиска">
+        <input class="form-control d-inline" name="filter" value="@ViewBag.filter" type="search" autocomplete = "off" placeholder="Введите название для поиска">
         <button class="btn btn-outline-success" type="submit">Найти</button>
         
         <table class="table">

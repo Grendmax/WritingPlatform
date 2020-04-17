@@ -12,7 +12,7 @@
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
-<h2>Learn More</h2>
+<h2>Подробнее</h2>
 
 @using (Ajax.BeginForm(ajax))
 {
@@ -22,20 +22,18 @@
         @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextAreaFor(model => model.Content,10,40, new { @readonly = "readonly",style="width: 100%; max-width: 100%;",  @class="form-control z-depth-1"  })
-
         </div>
     </div>
 
 
     <div class="form-horizontal">
-        <h4>WorksViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
 
             @Html.Label("Comment", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, " ", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Name, " ", new { htmlAttributes = new { @class = "form-control" ,autocomplete = "off"} })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -60,7 +58,6 @@
         </div>
 
         <div id="commentListFor">
-
             @Html.Action("GetComments")
         </div>
     </div>

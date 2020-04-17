@@ -16,15 +16,17 @@ namespace WritingPlatform.Controllers
     {
         readonly IUsers userServ;
         readonly IAuthen autServ;
+        readonly IWorks workServ;
 
         public UsersController(IUsers serv)
         {
             userServ = serv;
         }
-        public UsersController(IUsers serv,IAuthen serv1)
+        public UsersController(IUsers serv,IAuthen serv1, IWorks serv2)
         {
             autServ = serv1;
             userServ = serv;
+            workServ = serv2;
         }
 
         [HttpGet]
@@ -95,6 +97,10 @@ namespace WritingPlatform.Controllers
             {
                 UsersBO newUser = AutoMapper<UsersViewModel, UsersBO>.Map(user);
                 newUser.IsDelete = false;
+                HttpCookie cookie = new HttpCookie("My localhost cookie");
+                cookie["ids"] = autServ.GetUserId(user.Login, user.Password).ToString();
+                cookie.Expires = DateTime.Now.AddHours(1);
+                Response.Cookies.Add(cookie);
                 userServ.Create(newUser);               
                 return RedirectToActionPermanent("Index", "Users");
             }
@@ -133,7 +139,7 @@ namespace WritingPlatform.Controllers
             }
 
             UsersViewModel oldUser = AutoMapper<UsersBO, UsersViewModel>.Map(userServ.GetUser, (int)ids);
-
+            ViewBag.UserWorksList = workServ.GetWorks().Where(x => x.UserId == ids).ToList();
             return View(oldUser);
         }
 
@@ -159,15 +165,18 @@ namespace WritingPlatform.Controllers
             oldUser.IsDelete = true;
 
             UsersBO newUser = AutoMapper<UsersViewModel, UsersBO>.Map(oldUser);
-            //newUser.IsDelete = true;
 
             userServ.Update(newUser);
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
-        
-
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult CheckUserName([Bind(Prefix = "Login")]string username)
+        {
+            return Json(!userServ.GetUsers().Any(u => u.Login == username), JsonRequestBehavior.AllowGet);
+        }
 
 
 

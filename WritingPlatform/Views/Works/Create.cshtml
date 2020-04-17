@@ -1,10 +1,10 @@
 ﻿@model WritingPlatform.Models.WorksViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Создание";
 }
 
-<h2>Create</h2>
+<h2>Произведение</h2>
 
 
 @using (Html.BeginForm())
@@ -18,7 +18,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control",autocomplete = "off", } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>

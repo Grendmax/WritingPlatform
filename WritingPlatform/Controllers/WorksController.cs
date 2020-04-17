@@ -220,8 +220,42 @@ namespace WritingPlatform.Controllers
 
         public ActionResult Delete(int id)
         {
-            workServ.DeleteWork(id);
-            return RedirectToAction("Index", "Works");
+            HttpCookie cookieReqs = Request.Cookies["My localhost cookie"];
+
+            int idsUser = 0;
+
+            int thisWorkUserId = workServ.GetWork(id).UserId;
+
+            if (cookieReqs != null)
+            {
+                idsUser = Convert.ToInt32(cookieReqs["ids"]);
+                if (idsUser == thisWorkUserId)
+                {
+                    List<CommentsBO> workCommentsList = commentServ.GetComments().Where(x => x.WorkId == id).ToList();
+                    List<RatingsBO> workRatingList = ratingServ.GetRatings().Where(x => x.WorkId == id).ToList();
+                    foreach (var item in workCommentsList)
+                    {
+                        commentServ.DeleteComment(item.Id);
+                    }
+                    foreach (var item in workRatingList)
+                    {
+                        ratingServ.DeleteRating(item.Id);
+                    }
+                    workServ.DeleteWork(id);
+
+                    return RedirectToAction("Index", "Works");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Works");
+                }
+            }
+            else {
+                FormsAuthentication.SignOut();
+                return RedirectToAction("Index", "Works");
+            }
+
+            
         }
 
         public ActionResult PersonalProfile()
@@ -229,6 +263,7 @@ namespace WritingPlatform.Controllers
             return View();
         }
 
+        
         public ActionResult Details(int id)
         {
             WorksViewModel work = AutoMapper<WorksBO, WorksViewModel>.Map(workServ.GetWork, (int)id);
@@ -236,9 +271,6 @@ namespace WritingPlatform.Controllers
             work.UserId = 1;
             return View(work);
         }
-
-
-
 
 
         [HttpPost]

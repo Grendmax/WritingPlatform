@@ -9,26 +9,28 @@
 <div class="panel">
     <div class="panel-body">
         <div class="form-group">
-            @using (Html.BeginForm()) {
+            @using (Html.BeginForm())
+            {
                 <div class="alert alert-warning">
                     @Html.ValidationSummary()
                 </div>
 
                 <div class="form-group">
                     <label>Имя пользователя</label>
-                    @Html.TextBoxFor(m=>m.Login,new {@class="form-control" })
+                    @Html.TextBoxFor(m => m.Login, new { @class = "form-control",autocomplete = "off" })
                 </div>
 
                 <div class="form-group">
                     <label>Пароль</label>
-                    @Html.PasswordFor(m => m.Password, new { @class="form-control" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Войти" class="btn btn-primary"  /><br></br>
-                    <p>  @Html.ActionLink("Создать аккаунт", "Create", "Users",null,new { @class = "btn btn-primary" })  </p>
+                    <input type="submit" value="Войти" class="btn btn-primary" /><br></br>
+                    <p>  @Html.ActionLink("Создать аккаунт", "Create", "Users", null, new { @class = "btn btn-primary" })  </p>
                 </div>
 
             }
         </div>
     </div>
 </div>
+
